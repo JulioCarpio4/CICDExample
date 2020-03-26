@@ -27,7 +27,7 @@ jobs:
       - run: 
           name: Create a task definition to use the new docker image
           command: |
-            aws register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"customimagecontainer\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc:latest\",\"cpu\":512,\"memory\":512,\"essential\":true}]"
+            aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"customimagecontainer\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc:latest\",\"cpu\":512,\"memory\":512,\"essential\":true}]"
 workflows: 
   version: 2
   testworkflow:
