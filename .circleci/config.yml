@@ -5,6 +5,7 @@ jobs:
       - image: alpine:3.7
     steps:
       - checkout 
+      - setup_remote_docker
       # Install via apk on alpine based images
       - run:
           name: Install Docker client
