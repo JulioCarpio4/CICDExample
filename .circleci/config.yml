@@ -9,7 +9,7 @@ jobs:
       # Install via apk on alpine based images
       - run:
           name: Install Docker client
-          command: apk add docker-cli
+          command: apk update && apk add docker-cli
       - run:
           name: Build docker image
           command: |
