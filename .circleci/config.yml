@@ -25,7 +25,8 @@ jobs:
       - run: 
           name: Test of listing s3 buckets from aws-cli
           command: |
-            echo $aws_access_key_id
+            echo $AWS_ACCESS_KEY_ID
+            echo $hola
 workflows: 
   version: 2
   testworkflow:
