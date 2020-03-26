@@ -17,3 +17,11 @@ jobs:
             echo 'Starting building docker image'
             docker build -t circlecidockerimage .
             echo 'Finished building docker image'
+workflows: 
+  version: 2
+  testworkflow:
+    jobs: 
+      - build:
+          filters:
+              branches:
+                only: master
