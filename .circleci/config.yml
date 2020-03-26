@@ -6,10 +6,6 @@ jobs:
     steps:
       - checkout 
       - setup_remote_docker
-      # Install via apk on alpine based images
-      #- run:
-      #    name: Install Docker client
-      #    command: apk update && apk add docker-cli
       - run:
           name: Build docker image
           command: |
@@ -28,6 +24,12 @@ jobs:
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc
             docker tag circlecidockerimage:latest 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc:latest
             docker push 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc:latest
+      - run: 
+          name: Create a task definition to use the new docker image
+          command: |
+            aws register-task-definition \
+            --family circlecitaskdef \ 
+            --container-definitions "[{\"name\":\"customimagecontainer\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc:latest\",\"cpu\":512,\"memory\":512,\"essential\":true}]"
 workflows: 
   version: 2
   testworkflow:
