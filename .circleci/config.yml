@@ -23,10 +23,11 @@ jobs:
             unzip awscliv2.zip
             sudo ./aws/install
       - run: 
-          name: Test of listing s3 buckets from aws-cli
+          name: Pushing the created docker image to AWS 
           command: |
-            echo $AWS_ACCESS_KEY_ID
-            echo $hola
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 492266378106.dkr.ecr.us-east-1.amazonaws.com/juliocarpio
+            docker tag circlecidockerimage:latest 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimage:latest
+            docker push 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimage:latest
 workflows: 
   version: 2
   testworkflow:
