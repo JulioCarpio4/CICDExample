@@ -27,7 +27,7 @@ jobs:
             docker push 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc:latest
       - run: 
           name: Create a task definition to use the new docker image
-          command: |
+          command: yes "" |
             aws configure set default.region us-east-1
             aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"customimagecontainer\",\"image\":\"nginx\",\"cpu\":512,\"memory\":512,\"essential\":true}]"
 workflows: 
