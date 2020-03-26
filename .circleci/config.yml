@@ -27,7 +27,8 @@ jobs:
       - run: 
           name: Create a task definition to use the new docker image
           command: |
-            aws ecs register-task-definition --region us-east-1 --family circlecitaskdef --container-definitions "[{\"name\":\"customimagecontainer\",\"image\":\"nginx\",\"cpu\":512,\"memory\":512,\"essential\":true}]"
+            aws configure set default.region us-east-1
+            aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"customimagecontainer\",\"image\":\"nginx\",\"cpu\":512,\"memory\":512,\"essential\":true}]"
 workflows: 
   version: 2
   testworkflow:
