@@ -25,9 +25,9 @@ jobs:
       - run: 
           name: Pushing the created docker image to AWS 
           command: |
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 492266378106.dkr.ecr.us-east-1.amazonaws.com/juliocarpio
-            docker tag circlecidockerimage:latest 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimage:latest
-            docker push 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimage:latest
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc
+            docker tag circlecidockerimage:latest 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc:latest
+            docker push 492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc:latest
 workflows: 
   version: 2
   testworkflow:
