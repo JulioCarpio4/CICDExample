@@ -30,6 +30,18 @@ jobs:
           command: |
             aws configure set default.region us-east-1
             aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"customimagecontainer\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc\",\"cpu\":512,\"memory\":512,\"essential\":true}]"
+      - run: 
+          name: Update Elastic Container Service to use the new task definition
+          command: |
+            aws ecs update-service --service MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --task-definition circlecitaskdef
+  completion-check:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Completion task Checking
+          command: |
+            echo 'Finished updating task definition and ecs update-service'
 workflows: 
   version: 2
   testworkflow:
@@ -39,3 +51,6 @@ workflows:
           filters:
               branches:
                 only: master
+      - completion-check:
+          requires: 
+            - build
