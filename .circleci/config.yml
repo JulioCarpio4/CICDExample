@@ -33,7 +33,7 @@ jobs:
       - run: 
           name: Update Elastic Container Service to use the new task definition
           command: |
-            aws ecs update-service --service clusterjc --task-definition circlecitaskdef
+            aws ecs update-service --service service-jc --task-definition circlecitaskdef
   completion-check:
     docker:
       - image: alpine:3.7
