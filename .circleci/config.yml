@@ -29,7 +29,7 @@ jobs:
           name: Create a task definition to use the new docker image
           command: |
             aws configure set default.region us-east-1
-      # aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"customimagecontainer\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc\",\"cpu\":512,\"memory\":512,\"essential\":true}]"
+            aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"service-jc\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc\",\"cpu\":512,\"memory\":512,\"essential\":true}]" --output text 
       - run: 
           name: Update Elastic Container Service to use the new task definition
           command: |
