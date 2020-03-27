@@ -32,9 +32,9 @@ jobs:
             aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"service-jc\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc\",\"cpu\":256,\"memory\":256,\"portMappings\":[{\"containerPort\":80,\"hostPort\":80}],\"essential\":true}]" --output text 
       - run: 
           name: Update Elastic Container Service to use the new task definition
-          command: yes "" |
+          command: |
             aws ecs update-service --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --service service-jc --task-definition circlecitaskdef --force-new-deployment --output json
-            yes "" | aws ecs wait services-stable --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --services service-jc
+            aws ecs wait services-stable --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --services service-jc
             echo 'Finished update service definition'
   completion-check:
     docker:
