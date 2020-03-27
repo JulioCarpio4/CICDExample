@@ -29,11 +29,13 @@ jobs:
           name: Create a task definition to use the new docker image
           command: |
             aws configure set default.region us-east-1
-            aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"service-jc\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc\",\"cpu\":512,\"memory\":512,\"portMappings\":[{\"containerPort\":80,\"hostPort\":80}],\"essential\":true}]" --output text 
+            aws ecs register-task-definition --family circlecitaskdef --container-definitions "[{\"name\":\"service-jc\",\"image\":\"492266378106.dkr.ecr.us-east-1.amazonaws.com/circlecidockerimagejc\",\"cpu\":256,\"memory\":256,\"portMappings\":[{\"containerPort\":80,\"hostPort\":80}],\"essential\":true}]" --output text 
       - run: 
           name: Update Elastic Container Service to use the new task definition
           command: |
-            aws ecs update-service --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --service service-jc --task-definition circlecitaskdef --force-new-deployment --output text
+            aws ecs update-service --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --service service-jc --task-definition circlecitaskdef --force-new-deployment --output json
+            aws ecs wait services-stable --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --services service-jc
+            echo 'Finished update service definition'
   completion-check:
     docker:
       - image: alpine:3.7
