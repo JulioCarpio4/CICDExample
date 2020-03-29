@@ -19,6 +19,7 @@ jobs:
             unzip awscliv2.zip
             sudo ./aws/install
             sudo apt-get install -y less
+            export AWS_PAGER="less"
       - run: 
           name: Pushing the created docker image to AWS 
           command: |
@@ -33,7 +34,7 @@ jobs:
       - run: 
           name: Update Elastic Container Service to use the new task definition
           command: |
-            aws ecs update-service --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --service service-jc --task-definition circlecitaskdef --force-new-deployment --output json
+            aws ecs update-service --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --service service-jc --task-definition circlecitaskdef --force-new-deployment --output table
             aws ecs wait services-stable --cluster MainJC-ECS-1TGQP0KCICPBJ-ECSCluster-64LL3NBPC7EX --services service-jc
             echo 'Finished update service definition'
   completion-check:
