@@ -34,8 +34,8 @@ jobs:
       - run: 
           name: Update Elastic Container Service to use the new task definition
           command: |
-            ECS_ID=$(aws ecs update-service --cluster MainJC-ECS-IR25I2TTLDNZ-ECSCluster-6EFXWETLUSRN --service service-jc --task-definition circlecitaskdef --force-new-deployment --output table --query id)
-            aws ecs wait services-stable --cluster MainJC-ECS-IR25I2TTLDNZ-ECSCluster-6EFXWETLUSRN --services service-jc
+            ECS_ID=$(aws ecs update-service --cluster Main-JC-ECS-34I0LIWU6AUY-ECSCluster-1NJHOEGS6Z603 --service service-jc --task-definition circlecitaskdef --force-new-deployment --output table --query id)
+            aws ecs wait services-stable --cluster Main-JC-ECS-34I0LIWU6AUY-ECSCluster-1NJHOEGS6Z603 --services service-jc
             echo 'Finished update service definition'
   completion-check:
     docker:
